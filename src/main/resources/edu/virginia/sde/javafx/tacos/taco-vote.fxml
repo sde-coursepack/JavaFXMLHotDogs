@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:controller="edu.virginia.sde.javafx.tacos.HotDogVotesController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+       <GridPane layoutX="200.0" layoutY="140.0">
+           <columnConstraints>
+               <ColumnConstraints hgrow="SOMETIMES" maxWidth="139.0" minWidth="10.0" prefWidth="132.0"/>
+               <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.0" minWidth="10.0" prefWidth="68.0"/>
+           </columnConstraints>
+           <rowConstraints>
+               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+           </rowConstraints>
+           <RadioButton fx:id="sandwichButton" mnemonicParsing="false" text="Sandwich"/>
+           <RadioButton fx:id="tacoButton" mnemonicParsing="false" text="Taco" GridPane.rowIndex="1"/>
+           <RadioButton fx:id="bothButton" mnemonicParsing="false" text="Both" GridPane.rowIndex="2"/>
+           <RadioButton fx:id="neitherButton" mnemonicParsing="false" text="Neither" GridPane.rowIndex="3"/>
+           <Label fx:id="sandwichCountLabel" text="0" GridPane.columnIndex="1"/>
+           <Label fx:id="tacoCountLabel" text="0" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+           <Label fx:id="bothCountLabel" text="0" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+           <Label fx:id="neitherCountLabel" text="0" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+       </GridPane>
+      <Label layoutX="212.0" layoutY="103.0" text="Is a hotdog a sandwich or a taco?" />
+      <Button fx:id="submitButton" onAction="#handleSubmitButton" layoutX="200.0" layoutY="279.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="122.0" text="Submit" />
+      <Button fx:id="graphButton" onAction="#handleGraphButton" layoutX="328.0" layoutY="279.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="61.0" text="Graph" />
+   </children>
+</AnchorPane>
