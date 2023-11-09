@@ -71,21 +71,11 @@ public class HotDogVotesController {
         var toggle = (RadioButton) buttonGroup.getSelectedToggle();
         var choice = toggle.getText();
         hotDogVotes.addVote(choice);
-        var label = getLabelFor(toggle);
-        refreshLabels();
-    }
 
-    private Label getLabelFor(RadioButton radioButton) {
-        if (radioButton == sandwichButton) {
-            return sandwichCountLabel;
-        } else if (radioButton == tacoButton) {
-            return tacoCountLabel;
-        } else if (radioButton == bothButton) {
-            return bothCountLabel;
-        } else if (radioButton == neitherButton) {
-            return neitherCountLabel;
-        }
-        throw new IllegalArgumentException("Invalid Button: " + radioButton);
+        var service = new HotDogVotesService();
+        service.save(hotDogVotes);
+
+        refreshLabels();
     }
 
     private void refreshLabels() {

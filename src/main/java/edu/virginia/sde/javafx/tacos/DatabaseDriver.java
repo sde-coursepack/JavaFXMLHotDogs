@@ -20,12 +20,12 @@ public class DatabaseDriver {
         try {
             var statement = connection.prepareStatement(
                     """
-                        CREATE table if not exists VOTES (
-                        ID INTEGER PRIMARY KEY,
-                        Choice Text UNIQUE NOT NULL,
-                        Votes INTEGER NOT NULL
-                    );
-                    """);
+                                CREATE table if not exists VOTES (
+                                ID INTEGER PRIMARY KEY,
+                                Choice Text UNIQUE NOT NULL,
+                                Votes INTEGER NOT NULL
+                            );
+                            """);
             statement.executeUpdate();
             connection.commit();
         } catch (SQLException e) {
@@ -40,9 +40,9 @@ public class DatabaseDriver {
             clearStatement.executeUpdate();
 
             var insertStatement = connection.prepareStatement(
-                """
-                INSERT INTO VOTES(Choice, Votes) 
-                    VALUES (?, ?)""");
+                    """
+                            INSERT INTO VOTES(Choice, Votes) 
+                                VALUES (?, ?)""");
             for (String choice : HotDogVotes.CHOICES) {
                 insertStatement.setString(1, choice);
                 insertStatement.setInt(2, hotDogVotes.getVotes(choice));
@@ -50,9 +50,25 @@ public class DatabaseDriver {
             }
             connection.commit();
         } catch (SQLException e) {
-            connection.rollback();;
+            connection.rollback();
+            ;
             throw e;
         }
+    }
+
+    public HotDogVotes getVotes() throws SQLException {
+        var statement = connection.prepareStatement(
+                """
+                        SELECT * FROM VOTES;
+                        """);
+        var hotDotVotes = new HotDogVotes();
+        var resultSet = statement.executeQuery();
+        while(resultSet.next()) {
+            var choice = resultSet.getString("Choice");
+            var votes = resultSet.getInt("Votes");
+            hotDotVotes.setVote(choice, votes);
+        }
+        return hotDotVotes;
     }
 
     public void disconnect() throws SQLException {

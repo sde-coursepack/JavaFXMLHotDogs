@@ -12,11 +12,15 @@ public class HotDogVotesApplication extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
+    public void start(Stage primaryStage) throws Exception {
+        var hotDogVotesService = new HotDogVotesService();
+        var hotDogVotes = hotDogVotesService.retrieve();
+
         var fxmlLoader = new FXMLLoader(HotDogVotesApplication.class.getResource("taco-vote.fxml"));
         var scene = new Scene(fxmlLoader.load());
         var controller = (HotDogVotesController) fxmlLoader.getController();
         controller.setPrimaryStage(primaryStage);
+        controller.setHotDogVotes(hotDogVotes);
         primaryStage.setTitle("Hot Dog Vote");
         primaryStage.setScene(scene);
         primaryStage.show();
