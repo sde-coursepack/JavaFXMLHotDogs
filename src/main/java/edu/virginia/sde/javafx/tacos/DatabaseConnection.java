@@ -4,19 +4,18 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class DatabaseDriver {
+public class DatabaseConnection {
     public static final String DATABASE_CONNECTION = "jdbc:sqlite:hotdogs.sqlite";
 
-    private Connection connection;
+    private final Connection connection;
 
-    public DatabaseDriver() throws SQLException {
+    public DatabaseConnection() throws SQLException {
         connection = DriverManager.getConnection(DATABASE_CONNECTION);
         connection.setAutoCommit(false);
-        createTables();
-
+        createTablesIfNotExists();
     }
 
-    private void createTables() throws SQLException {
+    private void createTablesIfNotExists() throws SQLException {
         try {
             var statement = connection.prepareStatement(
                     """
@@ -56,19 +55,23 @@ public class DatabaseDriver {
         }
     }
 
-    public HotDogVotes getVotes() throws SQLException {
-        var statement = connection.prepareStatement(
-                """
-                        SELECT * FROM VOTES;
-                        """);
-        var hotDotVotes = new HotDogVotes();
-        var resultSet = statement.executeQuery();
-        while(resultSet.next()) {
-            var choice = resultSet.getString("Choice");
-            var votes = resultSet.getInt("Votes");
-            hotDotVotes.setVote(choice, votes);
+    public HotDogVotes getVotes() {
+        try {
+            var statement = connection.prepareStatement(
+                    """
+                            SELECT * FROM VOTES;
+                            """);
+            var hotDotVotes = new HotDogVotes();
+            var resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                var choice = resultSet.getString("Choice");
+                var votes = resultSet.getInt("Votes");
+                hotDotVotes.setVote(choice, votes);
+            }
+            return hotDotVotes;
+        } catch (SQLException e) {
+            return new HotDogVotes();
         }
-        return hotDotVotes;
     }
 
     public void disconnect() throws SQLException {

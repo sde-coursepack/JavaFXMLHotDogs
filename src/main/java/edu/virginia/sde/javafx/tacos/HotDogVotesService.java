@@ -4,16 +4,16 @@ import java.sql.SQLException;
 
 public class HotDogVotesService {
     public void save(HotDogVotes hotDogVotes) {
-        DatabaseDriver databaseDriver = null;
+        DatabaseConnection databaseConnection = null;
         try {
-            databaseDriver = new DatabaseDriver();
-            databaseDriver.updateVotes(hotDogVotes);
+            databaseConnection = new DatabaseConnection();
+            databaseConnection.updateVotes(hotDogVotes);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
             try {
-                if (databaseDriver != null) {
-                    databaseDriver.disconnect();
+                if (databaseConnection != null) {
+                    databaseConnection.disconnect();
                 }
             } catch (SQLException e) {
                 throw new RuntimeException(e);
@@ -22,16 +22,16 @@ public class HotDogVotesService {
     }
 
     public HotDogVotes retrieve() {
-        DatabaseDriver databaseDriver = null;
+        DatabaseConnection databaseConnection = null;
         try {
-            databaseDriver = new DatabaseDriver();
-            return databaseDriver.getVotes();
+            databaseConnection = new DatabaseConnection();
+            return databaseConnection.getVotes();
         } catch (SQLException e) {
             return new HotDogVotes();
         } finally {
             try {
-                if (databaseDriver != null) {
-                    databaseDriver.disconnect();
+                if (databaseConnection != null) {
+                    databaseConnection.disconnect();
                 }
             } catch (SQLException e) {
                 throw new RuntimeException(e);

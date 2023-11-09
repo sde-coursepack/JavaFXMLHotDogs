@@ -11,7 +11,7 @@ public class Demo {
         hotDogVotes.setVote("Neither", 12);
         hotDogVotes.setVote("Both", 3);
 
-        var databaseDriver = new DatabaseDriver();
+        var databaseDriver = new DatabaseConnection();
         databaseDriver.updateVotes(hotDogVotes);
         databaseDriver.disconnect();
     }

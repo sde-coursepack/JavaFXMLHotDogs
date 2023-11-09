@@ -7,7 +7,6 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.List;
 
 public class HotDogVotesController {
     @FXML
@@ -21,15 +20,6 @@ public class HotDogVotesController {
 
     @FXML
     private Label neitherCountLabel;
-
-    private List<Label> labelList;
-
-    @FXML
-    private Button submitButton;
-
-    @FXML
-    private Button graphButton;
-
     @FXML
     private RadioButton sandwichButton;
     @FXML
@@ -55,8 +45,6 @@ public class HotDogVotesController {
     }
 
     public void initialize() {
-        labelList = List.of(sandwichCountLabel, tacoCountLabel, bothCountLabel, neitherCountLabel);
-
         hotDogVotes = new HotDogVotes();
 
         buttonGroup = new ToggleGroup();
