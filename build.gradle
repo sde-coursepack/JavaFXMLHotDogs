@@ -24,3 +24,7 @@ dependencies {
 test {
     useJUnitPlatform()
 }
+
+application {
+    mainClass = "edu.virginia.sde.javafx.tacos.HotDogVotesApplication"
+}
